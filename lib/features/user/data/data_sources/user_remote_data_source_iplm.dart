@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:what_chat/app/constant/app_const.dart';
-
 import 'package:what_chat/app/constant/firebase_collection_const.dart';
 import 'package:what_chat/features/user/data/data_sources/user_remote_data_source.dart';
 import 'package:what_chat/features/user/data/models/user_model.dart';
