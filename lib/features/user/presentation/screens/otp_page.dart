@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:what_chat/app/login_page.dart/profile_submit_page.dart';
+import 'package:what_chat/features/user/presentation/screens/profile_submit_page.dart';
 import 'package:what_chat/app/theme/theme.dart';
 
 class OtpPage extends StatefulWidget {

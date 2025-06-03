@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_chat/app/login_page.dart/otp_page.dart';
+import 'package:what_chat/features/user/presentation/screens/otp_page.dart';
 import 'package:what_chat/app/theme/theme.dart';
 import 'package:country_picker/country_picker.dart';
 
