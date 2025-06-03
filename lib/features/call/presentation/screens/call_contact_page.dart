@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_chat/app/global/date/date.dart';
 import 'package:what_chat/app/global/widgets/profile_widget.dart';
-import 'package:what_chat/app/login_page.dart/profile_submit_page.dart';
+import 'package:what_chat/features/user/presentation/screens/profile_submit_page.dart';
 import 'package:what_chat/app/theme/theme.dart';
 
 class CallContactPage extends StatefulWidget {

@@ -91,7 +91,7 @@ class _SingleChatPageState extends State<SingleChatPage> {
                 Expanded(
                     child: ListView(children: [
                   _MessageLayout(
-                      message: "Hello",
+                      message: "Helloffffff  gggggggggggggggggggggggggggggggggggggggggworld",
                       alignment: Alignment.centerRight,
                       createAt: Timestamp.now(),
                       isSeen: false,
@@ -100,7 +100,7 @@ class _SingleChatPageState extends State<SingleChatPage> {
                       onSwipe: () {}),
                   _MessageLayout(
                       message:
-                          "Hidhdhdhkdjgkdg dghduighiuhg dhgdhg hdihgd dgdh gdgj",
+                          "Hidhdhdhkdjgkdg dghduighiuhg dhgdhg  dgdh gdgj",
                       alignment: Alignment.centerLeft,
                       createAt: Timestamp.now(),
                       isSeen: true,
@@ -301,7 +301,7 @@ class _SingleChatPageState extends State<SingleChatPage> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: SwipeTo(
-        //  onRightSwipe: onSwipe,
+     //  onRightSwipe: onSwipe,
         child: GestureDetector(
           onLongPress: onLongPress,
           child: Container(
@@ -335,7 +335,7 @@ class _SingleChatPageState extends State<SingleChatPage> {
                   ],
                 ),
                 Positioned(
-                  bottom: 8,
+                  bottom: 10,
                   right: 8,
                   child: Row(
                     children: [

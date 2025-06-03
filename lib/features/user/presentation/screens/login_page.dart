@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:what_chat/features/user/presentation/screens/otp_page.dart';
-import 'package:what_chat/app/theme/theme.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:what_chat/app/constant/app_const.dart';
+import 'package:what_chat/app/theme/theme.dart';
+import 'package:what_chat/features/user/presentation/cubit/auth/cubit/auth_cubit.dart';
+import 'package:what_chat/features/user/presentation/cubit/credential/cubit/credential_cubit.dart';
+import 'package:what_chat/features/user/presentation/screens/otp_page.dart';
+import 'package:what_chat/features/user/presentation/screens/profile_submit_page.dart';
+import 'package:what_chat/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,6 +25,42 @@ class _LoginPageState extends State<LoginPage> {
   String _phoneNumber = "";
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<CredentialCubit, CredentialState>(
+      listener: (context, credentialListenerState) {
+                if(credentialListenerState is CredentialSuccess) {
+          BlocProvider.of<AuthCubit>(context).LoggedIn();
+        }
+        if(credentialListenerState is CredentialFailure) {
+          toast("Something went wrong");
+        }
+
+      },
+      builder: (context, credentialBuilderState) {
+        if(credentialBuilderState is CredentialLoading){
+            return const Center(child: CircularProgressIndicator(color: tabColor,),);
+        }
+         if(credentialBuilderState is CredentialPhoneAuthSmsCodeReceived) {
+          return const OtpPage();
+        }
+        // if(credentialBuilderState is CredentialPhoneAuthProfileInfo) {
+        //   return ProfileSubmitPage(phoneNumner: _phoneNumber);
+        // }
+        // if(credentialBuilderState is CredentialSuccess) {
+        //   return BlocBuilder<AuthCubit, AuthState>(
+        //     builder: (context, authState){
+        //       if(authState is Authenticated) {
+        //         return HomePage(uid: authState.uid,);
+        //       }
+        //       return _BodyWidget(context);
+        //     },
+        //   );
+        // }
+        return _BodyWidget(context);
+      },
+    );
+  }
+
+  _BodyWidget(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -68,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.center,
                   child: Text(
                     _selectCountry.phoneCode,
-                    style: TextStyle(fontSize: 15,color: blackColor),
+                    style: TextStyle(fontSize: 15, color: blackColor),
                   ),
                 ),
                 Expanded(
@@ -84,14 +126,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: TextField(
                       controller: _phoneController,
-                      
                       decoration: InputDecoration(
                         hintStyle: TextStyle(color: tabColor),
                         hintText: "Phone Number",
                         border: InputBorder.none,
-                       
                       ),
-
                       style: TextStyle(fontSize: 15, color: blackColor),
                     ),
                   ),

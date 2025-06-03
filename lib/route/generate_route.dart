@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:what_chat/app/constant/page_const.dart';
+import 'package:what_chat/app/setting/setting_page.dart';
 import 'package:what_chat/features/call/presentation/screens/call_contact_page.dart';
 import 'package:what_chat/features/chat/presentation/screens/single_chat_page.dart';
 import 'package:what_chat/features/status/presentation/screens/my_status_page.dart';
 import 'package:what_chat/home/contact_page.dart';
 import 'package:what_chat/home/home_page.dart';
-import 'package:what_chat/setting/setting_page.dart';
 
 class GenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {

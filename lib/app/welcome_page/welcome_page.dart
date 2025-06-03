@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_chat/app/login_page.dart/login_page.dart';
+import 'package:what_chat/features/user/presentation/screens/login_page.dart';
 import 'package:what_chat/app/theme/theme.dart';
 
 class WelcomePage extends StatelessWidget {

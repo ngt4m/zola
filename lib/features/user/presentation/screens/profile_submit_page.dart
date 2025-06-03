@@ -4,11 +4,12 @@ import 'package:what_chat/app/constant/page_const.dart';
 import 'package:what_chat/app/global/widgets/profile_widget.dart';
 import 'package:what_chat/app/theme/theme.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:what_chat/home/home_page.dart';
 
 class ProfileSubmitPage extends StatefulWidget {
-  const ProfileSubmitPage({Key? key}) : super(key: key);
+ 
+  const ProfileSubmitPage({Key? key,  })
+      : super(key: key);
 
   @override
   _ProfileSubmitPageState createState() => _ProfileSubmitPageState();

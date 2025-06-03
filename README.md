@@ -3,7 +3,9 @@
 =======
 # what_chat
 
-What Chat Project
+What Chat Project 
+Clone Zalo app 
+Clean Architecture 
 
 ## Getting Started
 

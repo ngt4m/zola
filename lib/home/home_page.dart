@@ -6,10 +6,11 @@ import 'package:what_chat/features/call/presentation/screens/call_history_page.d
 import 'package:what_chat/features/chat/presentation/screens/chat_page.dart';
 import 'package:what_chat/features/status/presentation/screens/status_page.dart';
 import 'package:what_chat/home/contact_page.dart';
-import 'package:what_chat/setting/setting_page.dart';
+import 'package:what_chat/app/setting/setting_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+  const HomePage({Key? key, }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -26,20 +27,20 @@ class _HomePageState extends State<HomePage>
     switch (selectedIndex) {
       case 0:
         page = ChatPage();
-        _currentTabIndex=0;
+        _currentTabIndex = 0;
       case 1:
         page = StatusPage();
-        _currentTabIndex=1;
+        _currentTabIndex = 1;
       case 2:
         page = CallHistoryPage();
-        _currentTabIndex=2;
+        _currentTabIndex = 2;
 
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: appBarColor,
+        backgroundColor: appBarColor,
         title: Text(
           "What Chat",
           style: TextStyle(
