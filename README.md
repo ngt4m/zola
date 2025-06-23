@@ -4,9 +4,13 @@
 # what_chat
 
 What Chat Project 
+
 Clone Zalo app 
+
 Clean Architecture 
 
+Firebase 
+ 
 ## Getting Started
 
 
