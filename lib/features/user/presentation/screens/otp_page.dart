@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:what_chat/features/user/presentation/cubit/credential/cubit/credential_cubit.dart';
 import 'package:what_chat/features/user/presentation/screens/profile_submit_page.dart';
 import 'package:what_chat/app/theme/theme.dart';
 
@@ -11,10 +13,10 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _OTPcontroller = TextEditingController();
   @override
   void dispose() {
-    _controller.dispose();
+    _OTPcontroller.dispose();
     super.dispose();
   }
 
@@ -52,12 +54,7 @@ class _OtpPageState extends State<OtpPage> {
               height: 30,
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfileSubmitPage()));
-              },
+              onTap: _SubmitSmsCode,
               child: Container(
                 margin: EdgeInsets.only(top: 0.5 * h),
                 height: 50,
@@ -89,7 +86,7 @@ class _OtpPageState extends State<OtpPage> {
       child: Column(
         children: [
           PinCodeTextField(
-            controller: _controller,
+            controller: _OTPcontroller,
             appContext: context,
             length: 6,
             onCompleted: (String code) {},
@@ -102,5 +99,12 @@ class _OtpPageState extends State<OtpPage> {
         ],
       ),
     );
+  }
+    void _SubmitSmsCode(){
+    print("otpCode ${_OTPcontroller.text}");
+    if (_OTPcontroller.text.isNotEmpty){
+      BlocProvider.of<CredentialCubit>(context)
+          .SubmitSmsCode(smsCode: _OTPcontroller.text);
+    }
   }
 }

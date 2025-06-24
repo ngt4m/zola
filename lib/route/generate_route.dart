@@ -12,9 +12,9 @@ class GenerateRoute {
     final args = settings.arguments;
     final name = settings.name;
     switch (name) {
-      case PageConst.homePage:{
-        return MaterialBuilder(HomePage());
-      }
+      // case PageConst.homePage:{
+      //   return MaterialBuilder(HomePage());
+      // }
       case PageConst.contactUsersPage:
         {
           return MaterialBuilder(ContactPage());

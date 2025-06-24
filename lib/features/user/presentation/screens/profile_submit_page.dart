@@ -7,8 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:what_chat/home/home_page.dart';
 
 class ProfileSubmitPage extends StatefulWidget {
- 
-  const ProfileSubmitPage({Key? key,  })
+ final String phoneNumber;
+
+  const ProfileSubmitPage({Key? key, required this.phoneNumber,  })
       : super(key: key);
 
   @override
@@ -18,6 +19,7 @@ class ProfileSubmitPage extends StatefulWidget {
 class _ProfileSubmitPageState extends State<ProfileSubmitPage> {
   File? image;
   final TextEditingController _usernameController = TextEditingController();
+  
   Future SelectImage() async {
     try {
       final pickImage = await ImagePicker.platform
@@ -94,9 +96,8 @@ class _ProfileSubmitPageState extends State<ProfileSubmitPage> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-                // Navigator.pushNamed(context, PageConst.homePage);
+        // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage()));
+               
               },
               child: Container(
                 width: 150,

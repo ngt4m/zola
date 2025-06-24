@@ -24,37 +24,50 @@ class _LoginPageState extends State<LoginPage> {
 
   String _phoneNumber = "";
   @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<CredentialCubit, CredentialState>(
       listener: (context, credentialListenerState) {
-                if(credentialListenerState is CredentialSuccess) {
+        if (credentialListenerState is CredentialSuccess) {
           BlocProvider.of<AuthCubit>(context).LoggedIn();
         }
-        if(credentialListenerState is CredentialFailure) {
+        if (credentialListenerState is CredentialFailure) {
           toast("Something went wrong");
         }
-
       },
       builder: (context, credentialBuilderState) {
-        if(credentialBuilderState is CredentialLoading){
-            return const Center(child: CircularProgressIndicator(color: tabColor,),);
+        if (credentialBuilderState is CredentialLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: tabColor,
+            ),
+          );
         }
-         if(credentialBuilderState is CredentialPhoneAuthSmsCodeReceived) {
+        if (credentialBuilderState is CredentialPhoneAuthSmsCodeReceived) {
           return const OtpPage();
         }
-        // if(credentialBuilderState is CredentialPhoneAuthProfileInfo) {
-        //   return ProfileSubmitPage(phoneNumner: _phoneNumber);
-        // }
-        // if(credentialBuilderState is CredentialSuccess) {
-        //   return BlocBuilder<AuthCubit, AuthState>(
-        //     builder: (context, authState){
-        //       if(authState is Authenticated) {
-        //         return HomePage(uid: authState.uid,);
-        //       }
-        //       return _BodyWidget(context);
-        //     },
-        //   );
-        // }
+
+        if (credentialBuilderState is CredentialPhoneAuthProfileInfo) {
+          return ProfileSubmitPage(phoneNumber: _phoneNumber);
+        }
+        if (credentialBuilderState is CredentialSuccess) {
+          return BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, authState) {
+              if (authState is Authenticated) {
+                return HomePage(
+                  uid: authState.uid,
+                );
+              }
+              return _BodyWidget(context);
+            },
+          );
+        }
+
         return _BodyWidget(context);
       },
     );
@@ -138,14 +151,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OtpPage(),
-                  ),
-                );
-              },
+              onTap: _SubmitVerifyPhoneNumber,
               child: Container(
                 margin: EdgeInsets.only(top: 0.5 * h),
                 height: 50,
@@ -191,36 +197,48 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ));
   }
-}
 
-Widget _BuildDialogItem(Country country) {
-  return Container(
-    height: 40,
-    width: 300,
-    alignment: Alignment.center,
-    decoration: const BoxDecoration(
-      border: Border(
-        bottom: BorderSide(color: tabColor, width: 1.5),
-      ),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          " +${country.phoneCode}",
-          style: TextStyle(color: blackColor),
+  Widget _BuildDialogItem(Country country) {
+    return Container(
+      height: 40,
+      width: 300,
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: tabColor, width: 1.5),
         ),
-        Expanded(
-          child: Text(
-            " ${country.name}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            " +${country.phoneCode}",
             style: TextStyle(color: blackColor),
           ),
-        ),
-        const Spacer(),
-        const Icon(Icons.arrow_drop_down)
-      ],
-    ),
-  );
+          Expanded(
+            child: Text(
+              " ${country.name}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: blackColor),
+            ),
+          ),
+          const Spacer(),
+          const Icon(Icons.arrow_drop_down)
+        ],
+      ),
+    );
+  }
+
+  void _SubmitVerifyPhoneNumber() {
+    if (_phoneController.text.isNotEmpty) {
+      _phoneNumber = "+$_countryCode${_phoneController.text}";
+      print("phoneNumber $_phoneNumber");
+      BlocProvider.of<CredentialCubit>(context).SubmitVerifyPhoneNumber(
+        phoneNumber: _phoneNumber,
+      );
+    } else {
+      toast("Enter your phone number");
+    }
+  }
 }

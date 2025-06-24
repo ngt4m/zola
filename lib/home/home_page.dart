@@ -9,8 +9,8 @@ import 'package:what_chat/home/contact_page.dart';
 import 'package:what_chat/app/setting/setting_page.dart';
 
 class HomePage extends StatefulWidget {
-
-  const HomePage({Key? key, }) : super(key: key);
+  final String uid;
+  const HomePage({Key? key, required this.uid, }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
